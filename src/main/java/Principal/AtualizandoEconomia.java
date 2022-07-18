@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.swing.*;
 import java.io.IOException;
 import java.security.Key;
-import java.security.Principal.*;
+import java.security.Principal;
 
 import static Principal.LerGravarCSV.*;
 
@@ -27,6 +27,9 @@ public class AtualizandoEconomia {
     public String enderecoGSSProd = "https://gss.aegea.com.br";
     public String enderecoGSS = enderecoGSSProd;
     public String enderecoAcatamento = enderecoGSS + "/ords/prolagos/aegea/r/gss101/ate3100s1?clear=257&session=";
+
+    // ACATAMENTO /ords/prolagos/aegea/r/gss101/ate3100s1?clear=257&session=
+
     public String session;
     public String valorRes;
 //    public int valorResInt = Integer.parseInt(valorRes);
@@ -71,30 +74,8 @@ public class AtualizandoEconomia {
         int tamanhoArray = ORDEMSERVICO.size();
         System.out.println(tamanhoArray);
         for (int i = 0; i < tamanhoArray; i++) {
+/*
 
-
-            System.out.println("identificar field AnoSolicitação");
-            WebElement anoSolicitacao = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"P257_ANO_PEDIDO\"]")));
-            System.out.println("inputando ano");
-            anoSolicitacao.sendKeys(ANO.get(i));
-
-            System.out.println("identificar field NºSolicitação");
-            WebElement nmroSolicitacao = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"P257_NUM_PEDIDO\"]")));
-            System.out.println("Vou preencher Nº da Solicitação");
-            nmroSolicitacao.sendKeys(ORDEMSERVICO.get(i));
-            Thread.sleep(200);
-
-            System.out.println("Click botão pesquisar");
-            WebElement pesquisar = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("B295022948281420119")));
-            pesquisar.click();
-            Thread.sleep(1000);
-            System.out.println("Clickado botão pesquisar");
-
-            System.out.println("Click Editar");
-            WebElement editar = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/form/div[1]/div[2]/div[2]/main/div[2]/div/div[3]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[5]/div[1]/div/div[3]/table/tbody/tr[2]/td[1]/a")));
-            editar.click();
-            Thread.sleep(200);
-            System.out.println("Clickado Editar");
 
             System.out.println("Click info execução");
             WebElement info = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/form/div[1]/div[2]/div[2]/main/div[2]/div/div[1]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div[2]/div/div[4]/div[3]/div[1]/div[2]/div[4]/table/tbody/tr/td[10]/a")));
@@ -137,7 +118,7 @@ public class AtualizandoEconomia {
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-
+*/
 //        TELA DE ALTERAÇÃO DA MATRÍCULA          /ords/prolagos/aegea/r/gss101/cad3010s1?session=";
 
             browser.get("https://gss.aegea.com.br/ords/prolagos/aegea/r/gss101/cad3010s1?session=" + session);
@@ -205,60 +186,45 @@ public class AtualizandoEconomia {
 
 
             System.out.println("Se chegar aqui, deu certo");
-//-----------------------------------------------------------------EDIÇÃO DO CÓDIGO DA ECONOMIA-------------------------------------------------------
-//            Thread.sleep(10000);
-//            if(valorComInt == 0 && valorIndInt == 0 && valorPubInt == 0){
-//                WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_COD_UTILIZ")));
-//                campoCodigo.sendKeys(valorRes);
-//            }else{
-//                System.out.println("é outra coisa :)");
-//            }
-//            Thread.sleep(10000);
-            WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_COD_UTILIZ")));
-            campoCodigo.clear();
-            Thread.sleep(1000);
-            campoCodigo.sendKeys("2");
-            Thread.sleep(1000);
-            campoCodigo.sendKeys(Keys.TAB);
+
+            //ATRIBUIR 1 EM CODIGO -> RESIDENCIAL
+            if (COMERCIAL.get(i).equals(0) || COMERCIAL.get(i).equals("") ){
+                System.out.println("Vou atribuir codigo 1 e alterar economias");
+                WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_COD_UTILIZ")));
+                campoCodigo.clear();
+                Thread.sleep(1000);
+                campoCodigo.sendKeys("1");
+                Thread.sleep(1000);
+                campoCodigo.sendKeys(Keys.TAB);
 //            WebElement campoCodigoBotao = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_COD_UTILIZ_lov_btn")));
 //            campoCodigoBotao.click();
-            Thread.sleep(1000);
+                Thread.sleep(1000);
+            } else{
+                //ATRIBUIR 2 EM CODIGO -> COMERCIAL
+                System.out.println("Vou atribuir codigo 2 e alterar economias");
+                WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_COD_UTILIZ")));
+                campoCodigo.clear();
+                Thread.sleep(1000);
+                campoCodigo.sendKeys("2");
+                Thread.sleep(1000);
+                campoCodigo.sendKeys(Keys.TAB);
+//            WebElement campoCodigoBotao = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_COD_UTILIZ_lov_btn")));
+//            campoCodigoBotao.click();
+                Thread.sleep(1000);
+            }
 
 
-//
-//            Thread.sleep(10000);
-//            if(valorCom.equals(0)  && valorInd.equals(0) && valorPub.equals(0)){
-//                campoCodigo.clear();
-//                campoCodigo.sendKeys(valorRes);
-//                campoCodigo.sendKeys(Keys.TAB);
-//            }else if(valorInd.equals(1)){
-//                System.out.println("1 industrial");
-//                campoCodigo.clear();
-//                campoCodigo.sendKeys(valorInd);
-//                campoCodigo.sendKeys(Keys.TAB);
-//            }
-//            Thread.sleep(10000);
 
 // -----------------------------------------------------------------EDIÇÃO DAS ECONOMIAS------------------------------------------------------
-//            WebElement residencial = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_QTD_ECONOMIAS_RES")));
-//            residencial.clear();
-//            Thread.sleep(400);
-//            residencial.sendKeys(valorRes);
+            WebElement residencial = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_QTD_ECONOMIAS_RES")));
+            residencial.clear();
+            Thread.sleep(400);
+            residencial.sendKeys(RESIDENCIAL.get(i));
 
             WebElement comercial = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_QTD_ECONOMIAS_COM")));
             comercial.clear();
             Thread.sleep(400);
-            comercial.sendKeys("1");
-
-//            WebElement industrial = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_QTD_ECONOMIAS_IND")));
-//            industrial.clear();
-//            Thread.sleep(400);
-//            industrial.sendKeys(valorInd);
-//
-//            WebElement publica = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("P41_QTD_ECONOMIAS_PUB")));
-//            publica.clear();
-//            Thread.sleep(400);
-//            publica.sendKeys(valorPub);
+            comercial.sendKeys(COMERCIAL.get(i));
 
             System.out.println("Vou clicar em salvar");
             Thread.sleep(1000);
@@ -266,35 +232,77 @@ public class AtualizandoEconomia {
             salvar.click();
             Thread.sleep(2000);
             WebElement clickBody = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body")));
-            System.out.println("Passei aqui");
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             clickBody.sendKeys(Keys.ENTER);
-            Thread.sleep(1000);
-
-
-//            WebElement divPossivel = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[7]")));
-//            browser.switchTo().frame(frameContrato2);
-//            System.out.println("Mudei de frame");
-//            Thread.sleep(1000);
-
-//            System.out.println("Vou clicar em ok para confirmar alteração");
-//            Thread.sleep(4000);
-//            WebElement okSalvar = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[7]")));
-//            okSalvar.sendKeys(Keys.ENTER);
-////            WebElement okSalvar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[7]/div[3]/div/button[2]")));
-//            Thread.sleep(600);
-
-//            okSave.click();
+            System.out.println("Salvo");
 
             Thread.sleep(600);
             WebElement voltar = wait.until(ExpectedConditions.elementToBeClickable(By.id("B66203060358058814")));
             voltar.click();
             Thread.sleep(600);
-
+////-----------------------------------------------------------------FIM DA EDIÇÃO DE CONTRATO-------------------------------------------------------
             browser.get(enderecoAcatamento + session);
+            System.out.println("identificar field AnoSolicitação");
+            WebElement anoSolicitacao = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"P257_ANO_PEDIDO\"]")));
+            System.out.println("inputando ano");
+            anoSolicitacao.sendKeys(ANO.get(i));
+
+            System.out.println("identificar field NºSolicitação");
+            WebElement nmroSolicitacao = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"P257_NUM_PEDIDO\"]")));
+            System.out.println("Vou preencher Nº da Solicitação");
+            nmroSolicitacao.sendKeys(ORDEMSERVICO.get(i));
+            Thread.sleep(200);
+
+            System.out.println("Click botão pesquisar");
+            WebElement pesquisar = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("B295022948281420119")));
+            pesquisar.click();
+            Thread.sleep(1000);
+            System.out.println("Clickado botão pesquisar");
+
+            System.out.println("Click Editar");
+            WebElement editar = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/form/div[1]/div[2]/div[2]/main/div[2]/div/div[3]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[5]/div[1]/div/div[3]/table/tbody/tr[2]/td[1]/a")));
+            editar.click();
+            Thread.sleep(200);
+            System.out.println("Clickado Editar");
+
+            System.out.println("Click Encerramento");
+            WebElement encerramento = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("B62592711425528705")));
+            encerramento.click();
+            Thread.sleep(200);
+            System.out.println("Clickado Encerramento");
+            Thread.sleep(200);
+
+
+            System.out.println("Click Sim Tramite");
+//            WebElement janelaTramite = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[15]/div[2]")));
+            Thread.sleep(7000);
+            System.out.println("Identificou tramite");
+            clickBody.click();
+            System.out.println("Clicou body");
+            Thread.sleep(7000);
+            clickBody.sendKeys(Keys.ENTER);
+            System.out.println("Salvo");
+            Thread.sleep(2000);
+            System.out.println("Clickado Encerramento");
+            Thread.sleep(2000);
+
+
+
+
+            System.out.println("FOOOOOI");
+
+            Thread.sleep(10000);
+
+
+
+////--------------------------------------------------------------INÍCIO DE ENCERRAMENTO DA O.S.-----------------------------------------------------
+//            browser.get(enderecoAcatamento + session);
+
+
+
 
         }
-        JOptionPane.showMessageDialog(null, "Rotina realizada com sucesso!" + "\n" + "O EPP fica feliz em ajudar");
+        JOptionPane.showMessageDialog(null, "Rotina realizada com sucesso!" + "\n" + "    O EPP fica feliz em ajudar");
 
     }
 }

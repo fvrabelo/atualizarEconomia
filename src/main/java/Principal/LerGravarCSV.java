@@ -7,12 +7,17 @@ import javax.swing.JFileChooser;
 
 public class LerGravarCSV {
 
-    static final ArrayList<String> ORDEMSERVICO = new ArrayList<String>();
     static final ArrayList<String> ANO = new ArrayList<String>();
     static final ArrayList<String> MATRICULA = new ArrayList<String>();
+    static final ArrayList<String> ORDEMSERVICO = new ArrayList<String>();
+    static final ArrayList<String> RESIDENCIAL = new ArrayList<String>();
+    static final ArrayList<String> COMERCIAL = new ArrayList<String>();
     static String ano;
     static String ordemServico;
     static String numMatricula;
+    static String residencial;
+    static String comercial;
+
 
 
     //escolhe CSV
@@ -51,13 +56,23 @@ public class LerGravarCSV {
                 ANO.add(ano);
                 System.out.println("ANO: " + ano);
 
-                ordemServico = vDados[1].trim();
-                ORDEMSERVICO.add(ordemServico);
-                System.out.println("Nº O.S.: " + ordemServico);
-
                 numMatricula = vDados[1].trim();
                 MATRICULA.add(numMatricula);
                 System.out.println("Nº O.S.: " + numMatricula);
+
+                ordemServico = vDados[2].trim();
+                ORDEMSERVICO.add(ordemServico);
+                System.out.println("Nº O.S.: " + ordemServico);
+
+                residencial = vDados[3].trim();
+                RESIDENCIAL.add(residencial);
+                System.out.println("QTD RES.: " + residencial);
+
+                comercial = vDados[4].trim();
+                COMERCIAL.add(comercial);
+                System.out.println("QTD COM.: " + comercial);
+
+
             }
 
 
